@@ -22,4 +22,4 @@ export const removeOrderId = (orderId) => {
     const updatedSavedOrderIds = savedOrderIds?.filter((savedOrderId) => savedOrderId !== orderId);
     localStorage.setItem('saved_orders', JSON.stringify(updatedSavedOrderIds));
     return true;
-}
+};
