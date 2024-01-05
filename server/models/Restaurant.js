@@ -1,6 +1,12 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-// This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedRestaurant` array in User.js
+const categorySchema = new Schema({
+    cuisine: {
+        type: String,
+        required: true,
+    },
+});
+
 const restaurantSchema = new Schema({
     name: {
         type: String,
@@ -16,10 +22,9 @@ const restaurantSchema = new Schema({
     location: {
         type: String,
     },
-    restaurantId: {
-        type: String,
-        required: true,
-    }
+    categories: [categorySchema],
 });
 
-module.exports = restaurantSchema
+const Restaurant = model('Restaurant', restaurantSchema ); 
+
+module.exports = Restaurant
