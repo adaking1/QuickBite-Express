@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// import schema from Restaurant.js
-const restaurantSchema = require('./Restaurant');
 
 const userSchema = new Schema(
   {
@@ -21,10 +19,15 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedRestaurant to be an array of data that adheres to the bookSchema
-    savedRestaurant: [restaurantSchema],
+    savedRestaurants: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Restaurant'
+    }],
+    reviews: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Review'
+    }],
   },
-  // set this to use virtual below
   {
     toJSON: {
       virtuals: true,
@@ -49,7 +52,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 // when we query a user, we'll also get another field called `restaurantCount` with the number of saved books we have
 userSchema.virtual('restaurantCount').get(function () {
-  return this.savedRestaurant.length;
+  return this.savedRestaurants.length;
 });
 
 const User = model('User', userSchema);
