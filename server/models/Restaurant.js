@@ -17,7 +17,7 @@ const restaurantSchema = new Schema({
     },
     image: {
         type: String,
-        required: true,
+        required: true, 
     },
     location: {
         type: String,
@@ -25,6 +25,6 @@ const restaurantSchema = new Schema({
     categories: [categorySchema],
 });
 
-const Restaurant = model('Restaurant', restaurantSchema ); 
+const Restaurant = model('Restaurant', restaurantSchema);
 
 module.exports = Restaurant
