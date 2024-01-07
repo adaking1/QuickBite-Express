@@ -17,4 +17,25 @@ const SearchFood = () => {
         return () => saveOrder(savedOrderIds);
     });
 
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        if (!searchInput) {
+            return false;
+        }
+        try {
+            const { data } = await getFood({
+                variables: { input: searchInput }
+            });
+            const restaurantData = data.map((menu) => {
+                // put restaurant info here 
+                // click to go to menu
+            });
+            setSearchedFood(restaurantData);
+            setSearchInput('');
+            
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
 };
