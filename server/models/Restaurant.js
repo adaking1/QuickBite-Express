@@ -1,30 +1,31 @@
 const { Schema, model } = require('mongoose');
 
-const categorySchema = new Schema({
-    cuisine: {
-        type: String,
-        required: true,
-    },
-});
+
 
 const restaurantSchema = new Schema({
     name: {
         type: String,
         required: true,
     },
+    restaurantId: {
+        type: String,
+        required: true, 
+    },
     description: {
         type: String,
     },
     image: {
         type: String,
-        required: true,
+        required: true, 
     },
     location: {
         type: String,
     },
-    categories: [categorySchema],
+    cuisine: {
+        type: String
+    },
 });
 
-const Restaurant = model('Restaurant', restaurantSchema ); 
+const Restaurant = model('Restaurant', restaurantSchema);
 
 module.exports = Restaurant
