@@ -33,7 +33,7 @@ const SearchFood = () => {
                 description: restaurant.description,
                 image: restaurant.image,
                 location: restaurant.location,
-                cuisine: restaurant.cuisine            
+                items: restaurant.items          
             }));
             setSearchedFood(restaurantData);
             setSearchInput('');
