@@ -11,9 +11,9 @@ const resolvers = {
     Items: async () => {
       return await Item.find({}).populate('item');
     },
-    Cuisine: async () => {
-      return await Cuisine.find({}).populate('cuisine');
-    }
+    // Cuisine: async () => {
+    //   return await Cuisine.find({}).populate('cuisine');
+    // }
   }
 };
 
