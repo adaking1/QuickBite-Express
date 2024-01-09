@@ -44,7 +44,7 @@ const typeDefs = `
     }
 
     type Cuisine {
-        Restaurant:[Restaurant]
+        Restaurant:[Restaurant]!
         class(id: ID!): Restaurant
     }
 
@@ -68,7 +68,5 @@ const typeDefs = `
         token: ID!
         user: User
     }
-
-
-
 `
+module.exports = typeDefs;
