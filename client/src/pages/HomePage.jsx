@@ -9,12 +9,12 @@ import { GET_FOOD } from '../utils/queries';
 const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-    const [savedOrderIds, setSavedOrderIds] = useState(getSavedOrders());
+    const [savedRestaurantIds, setsavedRestaurantIds] = useState(getSavedOrders());
     const [saveOrder, { error }] = useMutation(SAVE_ORDER);
     const [getFood, { error, data }] = useQuery(GET_FOOD);
 
     useEffect(() => {
-        return () => saveOrder(savedOrderIds);
+        return () => saveOrder(savedRestaurantIds);
     });
 
     const handleFormSubmit = async (event) => {
@@ -26,13 +26,14 @@ const SearchFood = () => {
             const { data } = await getFood({
                 variables: { input: searchInput }
             });
-            const restaurantData = data.map((menu) => ({
+            const restaurantData = data.map((restaurant) => ({
                 // put restaurant info here 
-                menuId: menu.id,
-                name: menu.name,
-                description: menu.description,
-                image: menu.image,
-                location: menu.location                
+                id: restaurant._id,
+                name: restaurant.name,
+                description: restaurant.description,
+                image: restaurant.image,
+                location: restaurant.location,
+                cuisine: restaurant.cuisine            
             }));
             setSearchedFood(restaurantData);
             setSearchInput('');
