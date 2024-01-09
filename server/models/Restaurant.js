@@ -21,9 +21,6 @@ const restaurantSchema = new Schema({
     location: {
         type: String,
     },
-    cuisine: {
-        type: String
-    },
 });
 
 const Restaurant = model('Restaurant', restaurantSchema);
