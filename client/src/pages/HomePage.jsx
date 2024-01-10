@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import { saveRestaurantIds, getSavedRestaurants } from '../utils/localStorage';
+import { savedRestaurantIds, getSavedRestaurants } from '../utils/localStorage';
 import { useMutation, useQuery } from '@apollo/client';
 import { SAVE_RESTAURANT } from '../utils/mutations';
 import { GET_FOOD } from '../utils/queries';
@@ -10,8 +10,8 @@ const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [savedRestaurantIds, setsavedRestaurantIds] = useState(getSavedRestaurants());
-    const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
-    const [getFood, { error, data }] = useQuery(GET_FOOD);
+    const [saveRestaurant, { saveRestError }] = useMutation(SAVE_RESTAURANT);
+    const [getFood, { getFoodError, data }] = useQuery(GET_FOOD);
 
     useEffect(() => {
         return () => saveRestaurant(savedRestaurantIds);

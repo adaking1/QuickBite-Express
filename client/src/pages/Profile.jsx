@@ -8,10 +8,10 @@ import { UPDATE_EMAIL, UPDATE_PASSWORD, UPDATE_USERNAME, REMOVE_RESTAURANT } fro
 
 const Profile = () => {
     const { loading, data } = useQuery(GET_ME);
-    const [deleteRestaurant, { error }] = useMutation(REMOVE_RESTAURANT);
-    const [updateEmail, { error }] = useMutation(UPDATE_EMAIL);
-    const [updateUsername, { error }] = useMutation(UPDATE_USERNAME);
-    const [updatePassword, { error }] = useMutation(UPDATE_PASSWORD);
+    const [deleteRestaurant, { deleteRestError }] = useMutation(REMOVE_RESTAURANT);
+    const [updateEmail, { emailError }] = useMutation(UPDATE_EMAIL);
+    const [updateUsername, { usernameError }] = useMutation(UPDATE_USERNAME);
+    const [updatePassword, { passwordError }] = useMutation(UPDATE_PASSWORD);
 
     const userData = data?.me || {};
     if (userData.savedRestaurants) {
@@ -97,7 +97,7 @@ const Profile = () => {
         <>
         <div>
             <Container>
-                
+
             </Container>
         </div>
         </>

@@ -14,6 +14,7 @@ const typeDefs = `
         user(username: String!): User 
         reviews(username: String!):[Review]
         review(reviewId: ID!): Review
+        searchFood(restaurantInput: RestaurantInput): [Restaurant]
     }
 
     type Restaurant {
@@ -57,7 +58,7 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveRestaurant:(restaurantinput: RestaurantInput): User
+        saveRestaurant(restaurantinput: RestaurantInput): User
         removeRestaurant(restaurantId: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review
@@ -68,7 +69,6 @@ const typeDefs = `
         token: ID!
         user: User
     }
-
-
-
 `
+
+module.exports = typeDefs;

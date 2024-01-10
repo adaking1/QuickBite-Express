@@ -21,8 +21,18 @@ const restaurantSchema = new Schema({
     location: {
         type: String,
     },
+    cuisine: {
+        type: String,
+        required: true
+    },
+    items: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
+        }
+    ]
 });
 
 const Restaurant = model('Restaurant', restaurantSchema);
 
-module.exports = Restaurant
+module.exports = Restaurant;
