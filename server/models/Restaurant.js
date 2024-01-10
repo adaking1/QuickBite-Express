@@ -21,6 +21,10 @@ const restaurantSchema = new Schema({
     location: {
         type: String,
     },
+    items: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
+    }
 });
 
 const Restaurant = model('Restaurant', restaurantSchema);

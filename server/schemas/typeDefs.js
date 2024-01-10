@@ -16,6 +16,8 @@ const typeDefs = `
         review(reviewId: ID!): Review
         Restaurant(restaurantId: ID!): Restaurant
         Items(itemId: ID!): [Item]
+        allRestaurants: [Restaurant]
+        searchFood(restaurantInput: RestaurantInput): [Restaurant]
     }
 
     type Restaurant {
@@ -31,8 +33,7 @@ const typeDefs = `
     input RestaurantInput {
         restaurantId: String!
         name: String!
-        description: String 
-        image: String!
+        item: String!
         location: String
     }
 
@@ -59,7 +60,7 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveRestaurant(restaurantinput: RestaurantInput): User
+        saveRestaurant(restaurantId: ID!): User
         removeRestaurant(restaurantId: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review
