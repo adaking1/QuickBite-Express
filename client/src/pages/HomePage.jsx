@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import { saveOrderIds, getSavedOrders } from '../utils/localStorage';
+import { saveRestaurantIds, getSavedRestaurants } from '../utils/localStorage';
 import { useMutation, useQuery } from '@apollo/client';
-import { SAVE_ORDER } from '../utils/mutations';
+import { SAVE_RESTAURANT } from '../utils/mutations';
 import { GET_FOOD } from '../utils/queries';
 
 const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-    const [savedRestaurantIds, setsavedRestaurantIds] = useState(getSavedOrders());
-    const [saveOrder, { error }] = useMutation(SAVE_ORDER);
+    const [savedRestaurantIds, setsavedRestaurantIds] = useState(getSavedRestaurants());
+    const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
     const [getFood, { error, data }] = useQuery(GET_FOOD);
 
     useEffect(() => {
-        return () => saveOrder(savedRestaurantIds);
+        return () => saveRestaurant(savedRestaurantIds);
     });
 
     const handleFormSubmit = async (event) => {

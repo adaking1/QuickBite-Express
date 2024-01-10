@@ -95,8 +95,10 @@ const Profile = () => {
 
     return (
         <>
-        <div fluid='true' className='text-light bg-dark p-5'>
-            
+        <div>
+            <Container>
+                
+            </Container>
         </div>
         </>
     );
