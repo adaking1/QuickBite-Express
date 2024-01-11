@@ -1,25 +1,25 @@
-export const getSavedOrders = () => {
-    const savedOrderIds = localStorage.getItem('saved_orders')
-    ? JSON.parse(localStorage.getItem('saved_orders'))
+export const getSavedRestaurants = () => {
+    const savedRestaurantIds = localStorage.getItem('saved_restaurants')
+    ? JSON.parse(localStorage.getItem('saved_restaurants'))
     : [];
-    return savedOrderIds;
+    return savedRestaurantIds;
 };
-export const savedOrderIds = (orderIddArr) => {
-    if (orderIddArr.length) {
-        localStorage.setItem('saved_orders', JSON.stringify(orderIddArr));
+export const savedRestaurantIds = (restaurantIdArr) => {
+    if (restaurantIdArr.length) {
+        localStorage.setItem('saved_restaurants', JSON.stringify(restaurantIdArr));
     }
     else {
-        localStorage.removeItem('saved_orders');
+        localStorage.removeItem('saved_restaurants');
     }
 };
-export const removeOrderId = (orderId) => {
-    const savedOrderIds = localStorage.getItem('saved_orders')
-    ? JSON.parse(localStorage.getItem('saved_orders'))
+export const removeRestaurantId = (restaurantId) => {
+    const savedRestaurantIds = localStorage.getItem('saved_restaurants')
+    ? JSON.parse(localStorage.getItem('saved_restaurants'))
     : null;
-    if (!savedOrderIds) {
+    if (!savedRestaurantIds) {
         return false;
     }
-    const updatedSavedOrderIds = savedOrderIds?.filter((savedOrderId) => savedOrderId !== orderId);
-    localStorage.setItem('saved_orders', JSON.stringify(updatedSavedOrderIds));
+    const updatedSavedRestaurantIds = savedRestaurantIds?.filter((savedRestaurantId) => savedRestaurantId !== restaurantId);
+    localStorage.setItem('saved_orders', JSON.stringify(updatedSavedRestaurantIds));
     return true;
 };
