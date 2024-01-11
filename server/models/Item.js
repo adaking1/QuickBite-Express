@@ -13,7 +13,7 @@ const itemSchema = new Schema({
       type: String
     },
     price: {
-      type: Float,
+      type: Number,
       required: true,
       min: 0.99
     },
