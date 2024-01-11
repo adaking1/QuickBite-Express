@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 
 
 const restaurantSchema = new Schema({
-    name: {
+    restaurantName: {
         type: String,
         required: true,
     },
@@ -11,22 +11,28 @@ const restaurantSchema = new Schema({
         type: String,
         required: true, 
     },
-    description: {
+    restaurantDescription: {
         type: String,
     },
-    image: {
+    restaurantImage: {
         type: String,
         required: true, 
     },
     location: {
         type: String,
     },
-    items: {
+    cuisine: {
+        type: String,
+        required: true
+    },
+    items: [
+        {
         type: Schema.Types.ObjectId,
         ref: 'Item'
-    }
+        }
+    ]
 });
 
 const Restaurant = model('Restaurant', restaurantSchema);
 
-module.exports = Restaurant
+module.exports = Restaurant;

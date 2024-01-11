@@ -1,19 +1,19 @@
 const { Schema, model } = require('mongoose')
 
 const itemSchema = new Schema({
-    name: {
+    itemName: {
       type: String,
       required: true,
       trim: true
     },
-    description: {
+    itemDescription: {
       type: String
     },
-    image: {
+    itemImage: {
       type: String
     },
     price: {
-      type: Number,
+      type: Float,
       required: true,
       min: 0.99
     },
@@ -22,11 +22,7 @@ const itemSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Restaurant',
         }
-    ],
-    cuisine: {
-      type: String,
-      required: true,
-    },   
+    ], 
   });
 
   const Item = model('Item', itemSchema);

@@ -1,0 +1,10 @@
+[
+    {
+        "itemName":"Waffle Fries",
+        "cuisine": "Fast Food"
+    },
+    {
+        "itemName": "Burrito",
+        "cuisine": "Chipotle"
+    }
+]
