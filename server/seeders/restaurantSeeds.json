@@ -1,0 +1,24 @@
+[
+    {
+        "restaurantName": "McDonald's",
+        "restaurantId": "1",
+        "restaurantDescription":"Place to go get good and quick food",
+        "restaurantImage": "INSERT MCDONALDS LOGO",
+        "location":"Anywhere in the US"
+    },
+    {
+        "restaurantName": "Chick fil a ",
+        "restaurantId": "2",
+        "restaurantDescription":"Best place to get fries",
+        "restaurantImage": "INSERT CHICK FIL A LOGO",
+        "location":"Anywhere in USA"
+    },
+    {
+        "restaurantName": "CHIPOTLE",
+        "restaurantId": "3",
+        "restaurantDescription":"Best place to get healthy and quick food",
+        "restaurantImage": "INSERT CHIPOTLE LOGO",
+        "location":"United States"
+    }
+
+]

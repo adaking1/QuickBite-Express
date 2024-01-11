@@ -1,0 +1,26 @@
+[
+    {
+        "itemName": "McChicken",
+        "itemDescription":"Chicken Sandwich",
+        "itemImage":"MCCHICKEN IMAGE",
+        "price": 1.65,
+        "cuisine":"Fast Food",
+        "restaurantId":"1"
+    },
+    {
+        "itemName": "Waffle Fries",
+        "itemDescription":"Waffle looking french fries",
+        "itemImage":"WAFFLE FRIES IMAGE",
+        "price": 3.69,
+        "cuisine":"Fast Food",
+        "restaurantId":"2"
+    },
+    {
+        "itemName": "Burrito",
+        "itemDescription":"Tortilla filled with any protein and vegetables of your choice",
+        "itemImage":"BURRITO IMAGE",
+        "price": 12.83,
+        "cuisine":"Fast Food",
+        "restaurantId":"3"
+    }
+]
