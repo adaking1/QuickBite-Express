@@ -9,12 +9,13 @@ const typeDefs = `
     }
 
     type Query {
-        me: User 
+        getMe: User 
         users: [User]
         user(username: String!): User 
         reviews(username: String!):[Review]
         review(reviewId: ID!): Review
-        searchFood(restaurantInput: RestaurantInput): [Restaurant]
+        getFood(restaurantInput: RestaurantInput): [Restaurant]
+        getRestaurant(id: ID!): Restaurant
     }
 
     type Restaurant {
@@ -33,6 +34,7 @@ const typeDefs = `
         description: String 
         image: String!
         location: String
+        cuisine: String!
     }
 
     type Item {
@@ -41,7 +43,6 @@ const typeDefs = `
         image: String! 
         price: Float!
         Restaurants: [Restaurant]
-        cuisine: String!
     }
 
     type Cuisine {
@@ -56,7 +57,7 @@ const typeDefs = `
     }
 
     type Mutation {
-        login(email: String!, password: String!): Auth
+        loginUser(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         saveRestaurant(restaurantinput: RestaurantInput): User
         removeRestaurant(restaurantId: ID!): User

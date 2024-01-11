@@ -2,14 +2,11 @@ const { Restaurant, Item, Cuisine } = require('../models');
 
 const resolvers = {
   Query: {
-    // Restaurant: async () => {
-    //   return await Restaurant.find({}).populate('item').populate({
-    //     path: 'item',
-    //     populate: 'cuisine'
-    //   });
-    // },
-    searchFood: async (parent, { value }) => {
-      const restaurantData = await Restaurant.find({
+    getRestaurant: async (parent, { value }) => {
+      return await Restaurant.findOne({id: value});
+    },
+    getFood: async (parent, { value }) => {
+      return await Restaurant.find({
         $or: [
           {name: value},
           {location: value},

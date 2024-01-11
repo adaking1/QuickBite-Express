@@ -22,11 +22,7 @@ const itemSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Restaurant',
         }
-    ],
-    cuisine: {
-      type: String,
-      required: true,
-    },   
+    ], 
   });
 
   const Item = model('Item', itemSchema);

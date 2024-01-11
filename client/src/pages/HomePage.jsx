@@ -11,7 +11,7 @@ const SearchFood = () => {
     const [searchInput, setSearchInput] = useState('');
     const [savedRestaurantIds, setsavedRestaurantIds] = useState(getSavedRestaurants());
     const [saveRestaurant, { saveRestError }] = useMutation(SAVE_RESTAURANT);
-    const [getFood, { getFoodError, data }] = useQuery(GET_FOOD);
+    const { getFoodError, data } = useQuery(GET_FOOD);
 
     useEffect(() => {
         return () => saveRestaurant(savedRestaurantIds);
@@ -27,13 +27,11 @@ const SearchFood = () => {
                 variables: { input: searchInput }
             });
             const restaurantData = data.map((restaurant) => ({
-                // put restaurant info here 
                 id: restaurant._id,
                 name: restaurant.name,
                 description: restaurant.description,
                 image: restaurant.image,
-                location: restaurant.location,
-                items: restaurant.items          
+                location: restaurant.location        
             }));
             setSearchedFood(restaurantData);
             setSearchInput('');

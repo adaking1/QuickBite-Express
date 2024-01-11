@@ -4,14 +4,13 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { removeRestaurantId } from '../utils/localStorage';
 import { GET_ME } from '../utils/queries';
-import { UPDATE_EMAIL, UPDATE_PASSWORD, UPDATE_USERNAME, REMOVE_RESTAURANT } from '../utils/mutations';
+// import { UPDATE_EMAIL, UPDATE_USERNAME, REMOVE_RESTAURANT } from '../utils/mutations';
 
 const Profile = () => {
     const { loading, data } = useQuery(GET_ME);
     const [deleteRestaurant, { deleteRestError }] = useMutation(REMOVE_RESTAURANT);
     const [updateEmail, { emailError }] = useMutation(UPDATE_EMAIL);
     const [updateUsername, { usernameError }] = useMutation(UPDATE_USERNAME);
-    const [updatePassword, { passwordError }] = useMutation(UPDATE_PASSWORD);
 
     const userData = data?.me || {};
     if (userData.savedRestaurants) {
