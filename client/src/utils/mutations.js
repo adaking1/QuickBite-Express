@@ -40,25 +40,25 @@ mutation RemoveRestaurant($restaurantId: ID!) {
 // `;
 
 export const LOGIN_USER = gql `
-mutation Mutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
+      email
+      restaurantCount
+      savedRestaurants {
         _id
-        username
-        restaurantCount
-        email
-        savedRestaurants {
-          _id
-          restaurantId
-          name
-        }
-        Reviews {
-          _id
-        }
+        restaurantName
+      }
+      Reviews {
+        _id
+        reviewText
       }
     }
   }
+}
 `;
 
 export const ADD_USER = gql `

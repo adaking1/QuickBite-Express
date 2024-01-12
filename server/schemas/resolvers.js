@@ -27,6 +27,10 @@ const resolvers = {
           return user;
       }
       throw AuthenticationError('You need to be logged in!');
+  },
+  users : async () => {
+    const users = await User.find();
+    return users;
   }
   },
   Mutation: {

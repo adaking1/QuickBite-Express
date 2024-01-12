@@ -3,6 +3,7 @@ const typeDefs = `
         _id: ID
         username: String
         email: String
+        password: String
         restaurantCount: Int
         savedRestaurants: [Restaurant]
         Reviews: [Review]
