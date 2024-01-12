@@ -9,6 +9,14 @@
         "itemId": "3"
     },
     {
+        "itemName": "McDouble",
+        "itemDescription":"Double cheese burger",
+        "itemImage":"MCDOUBLE IMAGE",
+        "price": 1.95,
+        "cuisine":"Fast Food",
+        "restaurantId":"1"
+    },
+    {
         "itemName": "Waffle Fries",
         "itemDescription":"Waffle looking french fries",
         "itemImage":"WAFFLE FRIES IMAGE",
