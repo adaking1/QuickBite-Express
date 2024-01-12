@@ -5,7 +5,8 @@
         "itemImage":"MCCHICKEN IMAGE",
         "price": 1.65,
         "cuisine":"Fast Food",
-        "restaurantId":"1"
+        "restaurantId":"1",
+        "itemId": "3"
     },
     {
         "itemName": "Waffle Fries",
@@ -13,7 +14,8 @@
         "itemImage":"WAFFLE FRIES IMAGE",
         "price": 3.69,
         "cuisine":"Fast Food",
-        "restaurantId":"2"
+        "restaurantId":"2",
+        "itemId": "4"
     },
     {
         "itemName": "Burrito",
@@ -21,6 +23,7 @@
         "itemImage":"BURRITO IMAGE",
         "price": 12.83,
         "cuisine":"Fast Food",
-        "restaurantId":"3"
+        "restaurantId":"3",
+        "itemId": "5"
     }
 ]

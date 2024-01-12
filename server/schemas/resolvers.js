@@ -30,12 +30,26 @@ const resolvers = {
         ]
       });
     },
-    // Items: async () => {
-    //   return await Item.find({}).populate('item');
-    // },
-    // Cuisine: async () => {
-    //   return await Cuisine.find({}).populate('cuisine');
-    // }
+    getItems: async (parent, { restaurantId }) => {
+      try {
+        // Find the restaurant with the specified ID
+        const restaurant = await Restaurant.findOne({ _id: restaurantId });
+
+        if (!restaurant) {
+          throw new Error('Restaurant not found');
+        }
+
+        // Find the items associated with the restaurant
+        const items = await Item.find({ _id: { $in: restaurant.items } });
+
+        return items;
+      } catch (error) {
+        throw error;
+      }
+    },
+    
+  
+
   },
 
   Mutation: {

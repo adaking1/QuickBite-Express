@@ -1,10 +1,10 @@
 [
     {
-        "itemName":"Waffle Fries",
-        "cuisine": "Fast Food"
+        "items": {"itemId": "3"},
+        "restaurantId": "1"
     },
     {
-        "itemName": "Burrito",
-        "cuisine": "Chipotle"
+        "items": {"itemId": "5"},
+        "restaurantId": "3"
     }
 ]
