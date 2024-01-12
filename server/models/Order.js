@@ -7,10 +7,17 @@ const orderSchema = new Schema({
     },
     items: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'Item'
+          itemId: {
+              type: String
+          }
       }
-    ]
+  ],
+    restaurant: [
+      {
+          type: [String],
+          ref: 'Restaurant'
+      }
+  ], 
   });
   
   const Order = model('Order', orderSchema);
