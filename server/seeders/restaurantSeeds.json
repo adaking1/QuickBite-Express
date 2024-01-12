@@ -19,6 +19,83 @@
         "restaurantDescription":"Best place to get healthy and quick food",
         "restaurantImage": "INSERT CHIPOTLE LOGO",
         "location":"United States"
+    },
+    {
+        "restaurantName": "Burger King",
+        "restaurantId": "4",
+        "restaurantDescription":"Convient burger joint",
+        "restaurantImage": "INSERT BURGER KING LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "WENDYS",
+        "restaurantId": "5",
+        "restaurantDescription":"Best burgers if you like bacon",
+        "restaurantImage": "INSERT WENDYS LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Jersey Mikes",
+        "restaurantId": "6",
+        "restaurantDescription":"Best hot and cold subs.",
+        "restaurantImage": "INSERT JERSEYMIKES LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Duchess",
+        "restaurantId": "7",
+        "restaurantDescription":"Whatever you want we got",
+        "restaurantImage": "INSERT Duchess LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Moes",
+        "restaurantId": "8",
+        "restaurantDescription":"The best mexican cuisine when on the go",
+        "restaurantImage": "INSERT MOES LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Panera",
+        "restaurantId": "9",
+        "restaurantDescription":"Healthy spin on classics like mac and cheese",
+        "restaurantImage": "INSERT Panera LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Subway",
+        "restaurantId": "10",
+        "restaurantDescription":"The original ",
+        "restaurantImage": "INSERT MOES LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Chilis",
+        "restaurantId": "11",
+        "restaurantDescription":"Modern American food for anyone to come sit and enjoy",
+        "restaurantImage": "INSERT CHILIS LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Outback Steak House",
+        "restaurantId": "12",
+        "restaurantDescription":"A steakhouse with Aussie roots",
+        "restaurantImage": "INSERT OUTBACK LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Texas Roadhouse",
+        "restaurantId": "13",
+        "restaurantDescription":"A southern style steakhouse",
+        "restaurantImage": "INSERT TEXAS LOGO",
+        "location":"United States"
+    },
+    {
+        "restaurantName": "Five Guys",
+        "restaurantId": "14",
+        "restaurantDescription":"High quality and big portioned burger place",
+        "restaurantImage": "INSERT FIVE LOGO",
+        "location":"United States"
     }
 
 ]
