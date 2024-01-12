@@ -16,7 +16,21 @@ db.once('open', async () => {
         await cleanDB('Item','item');
 
         await User.create(userSeeds);
-
+        await Restaurant.create(restaurantSeeds);
+        for (let i=0; i<itemSeeds.length; i++){
+            const { _id, restaurantId } = await Item.create(itemSeeds[i]);
+            console.log(_id);
+            const restaurant = await Restaurant.findOneAndUpdate(
+                { restaurantId: restaurantId },
+                {
+                    $addToSet: {
+                        items: _id
+                    }
+                }
+            );
+        };
+        await Order.create(orderSeeds);
+        // await Item.create(itemSeeds);
         for (let i = 0; i < reviewSeeds.length; i++) {
             const { _id, reviewAuthor } = await Review.create(reviewSeeds[i]);
             const user = await User.findOneAndUpdate(
@@ -27,7 +41,7 @@ db.once('open', async () => {
                     },
                 }
             );
-        }
+        };
     } catch (err) {
         console.error(err);
         process.exit(1);

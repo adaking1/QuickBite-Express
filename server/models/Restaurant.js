@@ -23,7 +23,7 @@ const restaurantSchema = new Schema({
     },
     cuisine: {
         type: String,
-        required: true
+        // required: true
     },
     items: [
         {

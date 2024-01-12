@@ -17,12 +17,10 @@ const itemSchema = new Schema({
       required: true,
       min: 0.99
     },
-    restaurant: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Restaurant',
-        }
-    ], 
+    restaurantId:  {
+        type: String,
+        ref: 'Restaurant',
+        }, 
   });
 
   const Item = model('Item', itemSchema);
