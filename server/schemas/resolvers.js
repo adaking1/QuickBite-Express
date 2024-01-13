@@ -27,18 +27,18 @@ const resolvers = {
           return user;
       }
       throw AuthenticationError('You need to be logged in!');
-  },
-  users : async () => {
-    const users = await User.find();
-    return users;
-  }
+    },
+    users : async () => {
+      const users = await User.find();
+      return users;
+    }
   },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
-  },
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
@@ -51,7 +51,32 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-  },
+    },
+    removeUser: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findOneAndRemove({_id: context.user._id});
+        return user;
+      }
+      throw AuthenticationError;
+      
+    },
+    removeRestaurant: async (parent, { restaurantID }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$pull: {savedRestaurants: {restaurantID}}},
+          {new: true}
+        );
+      }
+      throw AuthenticationError;
+    },
+    updateEmail: async (parent, { email }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate({_id: context.user._id}, {email: email});
+        return user;
+      }
+      throw AuthenticationError;
+    },
   }
 };
 

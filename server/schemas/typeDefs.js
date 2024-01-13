@@ -64,6 +64,8 @@ const typeDefs = `
         removeRestaurant(restaurantId: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review
+        removeUser: User
+        updateEmail(newEmail: String!): Auth
 
     }
 

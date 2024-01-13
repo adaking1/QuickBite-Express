@@ -18,10 +18,10 @@ query GetRestaurant($getRestaurantId: ID!) {
     getRestaurant(id: $getRestaurantId) {
       _id
       restaurantId
-      name
+      restaurantName
       location
-      image
-      description
+      restaurantImage
+      restaurantDescription
       Items {
         name
         description
@@ -41,10 +41,10 @@ query GetMe {
       savedRestaurants {
         _id
         restaurantId
-        name
+        restaurantName
         location
-        image
-        description
+        restaurantImage
+        restaurantDescription
       }
       Reviews {
         reviewText

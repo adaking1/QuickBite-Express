@@ -25,15 +25,24 @@ mutation RemoveRestaurant($restaurantId: ID!) {
       savedRestaurants {
         _id
         restaurantId
-        name
+        restaurantName
       }
     }
   }
 `;
 
-// export const UPDATE_EMAIL = gql `
-
-// `;
+export const UPDATE_EMAIL = gql `
+mutation UpdateEmail($newEmail: String!) {
+  updateEmail(email: $newEmail) {
+    token
+    user {
+      _id
+      username
+      email
+    }
+  }
+}
+`;
 
 // export const UPDATE_USERNAME = gql `
 
@@ -75,9 +84,16 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
   }
 `;
 
-// export const DELETE_USER = gql `
+export const REMOVE_USER = gql `
+mutation RemoveUser {
+  removeUser {
+    _id
+    username
+    email
+  }
+}
 
-// `;
+`;
 
 export const ADD_REVIEW = gql `
 mutation AddReview($reviewText: String!) {
