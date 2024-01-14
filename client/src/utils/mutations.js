@@ -33,8 +33,7 @@ mutation RemoveRestaurant($restaurantId: ID!) {
 
 export const UPDATE_EMAIL = gql `
 mutation UpdateEmail($newEmail: String!) {
-  updateEmail(email: $newEmail) {
-    token
+  updateEmail(newEmail: $newEmail) {
     user {
       _id
       username
@@ -44,9 +43,17 @@ mutation UpdateEmail($newEmail: String!) {
 }
 `;
 
-// export const UPDATE_USERNAME = gql `
-
-// `;
+export const UPDATE_USERNAME = gql `
+mutation UpdateUsername($newUsername: String!) {
+  updateUsername(newUsername: $newUsername) {
+    user {
+      _id
+      username
+      email
+    }
+  }
+}
+`;
 
 export const LOGIN_USER = gql `
 mutation Login($email: String!, $password: String!) {

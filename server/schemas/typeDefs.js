@@ -66,6 +66,7 @@ const typeDefs = `
         removeReview(reviewId: ID!): Review
         removeUser: User
         updateEmail(newEmail: String!): Auth
+        updateUsername(newUsername: String!): Auth
 
     }
 

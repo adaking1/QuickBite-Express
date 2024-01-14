@@ -70,13 +70,20 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    updateEmail: async (parent, { email }, context) => {
+    updateEmail: async (parent, { newEmail }, context) => {
       if (context.user) {
-        const user = await User.findOneAndUpdate({_id: context.user._id}, {email: email});
+        const user = await User.findOneAndUpdate({_id: context.user._id}, {email: newEmail});
         return user;
       }
       throw AuthenticationError;
     },
+    updateUsername: async (parent, { newUsername }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate({_id: context.user._id}, {username: newUsername})
+        return user;
+      }
+      throw AuthenticationError;
+    }
   }
 };
 
