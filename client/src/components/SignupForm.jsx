@@ -69,7 +69,7 @@ return (
             <Form.Control
                 type='password'
                 placeholder='password'
-                name='usernpasswordame'
+                name='password'
                 onChange={handleInputChange}
                 value={formData.password}
                 required
