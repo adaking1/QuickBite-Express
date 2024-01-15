@@ -16,7 +16,7 @@ const typeDefs = `
         reviews(username: String!):[Review]
         review(reviewId: ID!): Review
         getFood(value: String!): [Restaurant]
-        getRestaurant(id: ID!): Restaurant
+        getRestaurant(restaurantId: ID!): Restaurant
     }
 
     type Restaurant {
@@ -30,6 +30,7 @@ const typeDefs = `
     }
 
     input RestaurantInput {
+        _id: ID
         restaurantId: String
         restaurantName: String
         item: String
@@ -60,7 +61,7 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveRestaurant(restaurantId: ID!): User
+        saveRestaurant(restaurantId: ID!, name: String!): User
         removeRestaurant(restaurantId: ID!): User
         addRestaurant(restaurantID: ID!): User
         addReview(reviewText: String!): Review

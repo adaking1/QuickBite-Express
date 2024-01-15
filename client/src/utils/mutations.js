@@ -1,19 +1,17 @@
 import { gql } from '@apollo/client';
 
 export const SAVE_RESTAURANT = gql `
-mutation SaveRestaurant($restaurantinput: RestaurantInput) {
-    saveRestaurant(restaurantinput: $restaurantinput) {
+mutation SaveRestaurant($restaurantId: ID!, $name: String!) {
+  saveRestaurant(restaurantId: $restaurantId, name: $name) {
+    _id
+    username
+    restaurantCount
+    savedRestaurants {
       _id
-      username
-      email
-      restaurantCount
-      savedRestaurants {
-        _id
-        restaurantId
-        name
-      }
+      restaurantName
     }
   }
+}
 `;
 
 export const REMOVE_RESTAURANT = gql `

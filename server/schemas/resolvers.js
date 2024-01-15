@@ -5,8 +5,8 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    getRestaurant: async (parent, { value }) => {
-      return await Restaurant.findOne({id: value});
+    getRestaurant: async (parent, { restaurantId }) => {
+      return await Restaurant.findOne({_id: restaurantId});
     },
     getFood: async (parent, { value }) => {
       // console.log(value);
@@ -60,13 +60,14 @@ const resolvers = {
       throw AuthenticationError;
       
     },
-    saveRestaurant: async (parent, { restaurantId }, context) => {
+    saveRestaurant: async (parent, { restaurantId, name }, context) => {
       if (context.user) { 
         const user = await User.findOneAndUpdate(
           {_id: context.user._id},
-          {$addToSet: {savedRestaurants: {restaurantId}}},
+          {$addToSet: {savedRestaurants: { _id: restaurantId, restaurantName: name }}},
           {new: true}
         );
+        return user;
       }
       throw AuthenticationError;
     },
@@ -74,7 +75,7 @@ const resolvers = {
       if (context.user) {
         return User.findOneAndUpdate(
           {_id: context.user._id},
-          {$pull: {savedRestaurants: {restaurantId}}},
+          {$pull: {savedRestaurants: {_id: restaurantId}}},
           {new: true}
         );
       }

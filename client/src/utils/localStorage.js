@@ -20,6 +20,9 @@ export const removeRestaurantId = (restaurantId) => {
         return false;
     }
     const updatedSavedRestaurantIds = savedRestaurantIds?.filter((savedRestaurantId) => savedRestaurantId !== restaurantId);
-    localStorage.setItem('saved_orders', JSON.stringify(updatedSavedRestaurantIds));
+    if (!updatedSavedRestaurantIds.length) {
+        localStorage.removeItem('saved_restaurants');
+    }
+    localStorage.setItem('saved_restaurants', JSON.stringify(updatedSavedRestaurantIds));
     return true;
 };

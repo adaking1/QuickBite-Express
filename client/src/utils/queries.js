@@ -14,8 +14,8 @@ query GetFood($value: String!) {
 `;
 
 export const GET_RESTAURANT = gql `
-query GetRestaurant($getRestaurantId: ID!) {
-    getRestaurant(id: $getRestaurantId) {
+query GetRestaurant($restaurantId: ID!) {
+    getRestaurant(restaurantId: $restaurantId) {
       _id
       restaurantId
       restaurantName
