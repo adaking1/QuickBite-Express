@@ -60,11 +60,21 @@ const resolvers = {
       throw AuthenticationError;
       
     },
-    removeRestaurant: async (parent, { restaurantID }, context) => {
+    saveRestaurant: async (parent, { restaurantId }, context) => {
+      if (context.user) { 
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$addToSet: {savedRestaurants: {restaurantId}}},
+          {new: true}
+        );
+      }
+      throw AuthenticationError;
+    },
+    removeRestaurant: async (parent, { restaurantId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           {_id: context.user._id},
-          {$pull: {savedRestaurants: {restaurantID}}},
+          {$pull: {savedRestaurants: {restaurantId}}},
           {new: true}
         );
       }

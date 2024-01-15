@@ -6,6 +6,7 @@ mutation SaveRestaurant($restaurantinput: RestaurantInput) {
       _id
       username
       email
+      restaurantCount
       savedRestaurants {
         _id
         restaurantId
