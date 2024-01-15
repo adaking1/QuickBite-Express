@@ -4,7 +4,7 @@ export const getSavedRestaurants = () => {
     : [];
     return savedRestaurantIds;
 };
-export const savedRestaurantIds = (restaurantIdArr) => {
+export const saveRestaurantIds = (restaurantIdArr) => {
     if (restaurantIdArr.length) {
         localStorage.setItem('saved_restaurants', JSON.stringify(restaurantIdArr));
     }

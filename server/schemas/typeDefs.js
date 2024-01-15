@@ -60,6 +60,7 @@ const typeDefs = `
         addUser(username: String!, email: String!, password: String!): Auth
         saveRestaurant(restaurantId: ID!): User
         removeRestaurant(restaurantId: ID!): User
+        addRestaurant(restaurantID: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review
 
