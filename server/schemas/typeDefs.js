@@ -16,7 +16,7 @@ const typeDefs = `
         reviews(username: String!):[Review]
         review(reviewId: ID!): Review
         getFood(value: String!): [Restaurant]
-        getRestaurant(id: ID!): Restaurant
+        getRestaurant(restaurantId: ID!): Restaurant
     }
 
     type Restaurant {

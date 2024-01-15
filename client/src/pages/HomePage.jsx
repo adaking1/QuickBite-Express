@@ -3,6 +3,7 @@ import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { useLazyQuery } from '@apollo/client';
 import { GET_FOOD } from '../utils/queries';
+import { Link } from 'react-router-dom';
 // import { useGetFood } from '../utils/helpers'
 const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
@@ -75,6 +76,7 @@ const SearchFood = () => {
                                 <Card.Body>
                                     <Card.Title>{restaurant.name}</Card.Title>
                                     <Card.Text>{restaurant.description}</Card.Text>
+                                    <Card.Link as={Link} to='/menu'>Select</Card.Link>
                                 </Card.Body>
                             </Card>
                         </Col>
