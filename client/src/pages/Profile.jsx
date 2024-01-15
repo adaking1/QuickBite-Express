@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { removeRestaurantId } from '../utils/localStorage';
 import { GET_ME } from '../utils/queries';
-import { REMOVE_RESTAURANT, REMOVE_USER, UPDATE_EMAIL } from '../utils/mutations';
+import { REMOVE_RESTAURANT, REMOVE_USER } from '../utils/mutations';
 import UpdateUsername from '../components/UpdateUsername';
 import UpdateEmail from '../components/UpdateEmail';
 
@@ -39,6 +39,21 @@ const Profile = () => {
             console.error(err);
         }
     };
+
+    const handleDeleteUser = async () => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        if (!token) {
+            return false;
+        }
+        try {
+            const data = await deleteUser();
+            Auth.logout();
+            return data;
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
 
     // const handleUpdateEmail = async (event) => {
     //     event.preventDefault();
