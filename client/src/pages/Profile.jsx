@@ -55,58 +55,6 @@ const Profile = () => {
         }
     }
 
-    // const handleUpdateEmail = async (event) => {
-    //     event.preventDefault();
-    //     const newEmail = event.target.value;
-    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    //     if (!token) {
-    //         return false;
-    //     }
-    //     try {
-    //         const { data } = await updateEmail({
-    //             variables: { newEmail }
-    //         });
-            
-    //     }
-    //     catch (err) {
-    //         console.err(err);
-    //     }
-    // };
-
-    // const handleUpdateUsername = async (event) => {
-    //     event.preventDefault();
-    //     const newUsername = event.target.value;
-    //     const token = Auth.loggedIn ? Auth.getToken() : null;
-    //     if (!token) {
-    //         return false;
-    //     }
-    //     try {
-    //         const { data } = await updateUsername({
-    //             variables: { newUsername }
-    //         });
-    //     }
-    //     catch (err) {
-    //         console.error(err);
-    //     }
-    // };
-
-    // const handleUpdatePassword = async (event) => {
-    //     event.preventDefault();
-    //     const newPassword = event.target.value;
-    //     const token = Auth.loggedIn ? Auth.getToken() : null;
-    //     if (!token) {
-    //         return false;
-    //     }
-    //     try {
-    //         const { data } = await updatePassword({
-    //             variables: { newPassword }
-    //         });
-    //     }
-    //     catch (err) {
-    //         console.error(err);
-    //     }
-    // };
-
     if (loading) {
         return <h2>Loading...</h2>;
     }
