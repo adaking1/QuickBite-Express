@@ -1,16 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const GET_FOOD = gql `
-query getFood($restaurantInput: RestaurantInput) {
-    getFood(restaurantInput: $restaurantInput) {
-      _id
-      restaurantId
-      name
-      location
-      description
-      image
-    }
+query GetFood($value: String!) {
+  getFood(value: $value) {
+    _id
+    restaurantId
+    restaurantName
+    location
+    restaurantDescription
+    restaurantImage
   }
+}
 `;
 
 export const GET_RESTAURANT = gql `
@@ -18,10 +18,10 @@ query GetRestaurant($getRestaurantId: ID!) {
     getRestaurant(id: $getRestaurantId) {
       _id
       restaurantId
-      name
+      restaurantName
       location
-      image
-      description
+      restaurantImage
+      restaurantDescription
       Items {
         name
         description
@@ -41,10 +41,10 @@ query GetMe {
       savedRestaurants {
         _id
         restaurantId
-        name
+        restaurantName
         location
-        image
-        description
+        restaurantImage
+        restaurantDescription
       }
       Reviews {
         reviewText

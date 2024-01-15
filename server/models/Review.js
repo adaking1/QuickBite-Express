@@ -15,7 +15,7 @@ const reviewSchema = new Schema ({
         trim: true,
     },
     restaurant: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'Restaurant',
         required: true,
       },
