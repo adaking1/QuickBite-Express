@@ -1,15 +1,18 @@
 [
     {
         "reviewText": "10/10 burger ",
-        "reviewAuthor": "Piero999"
+        "reviewAuthor": "Piero999",
+        "restaurant": "McDonald's"
     },
     {
         "reviewText": "Their pizza is amazing",
-        "reviewAuthor": "X365"
+        "reviewAuthor": "X365",
+        "restaurant": "McDonald's"
     },
     {
         "reviewText": "1/10 Their pasta has no flavor",
-        "reviewAuthor": "adamKing222"
+        "reviewAuthor": "adamKing222",
+        "restaurant": "CHIPOTLE"
     }
 
 ]
