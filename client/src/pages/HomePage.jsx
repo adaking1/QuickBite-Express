@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
+import { useStoreContext } from '../utils/GlobalState';
 import Auth from '../utils/auth';
 import { useLazyQuery } from '@apollo/client';
 import { GET_FOOD } from '../utils/queries';
-// import { useGetFood } from '../utils/helpers'
+import RestaurantPage from './RestaurantPage';
+import { SELECT_RESTAURANT } from '../utils/actions';
+
 const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    // const [state, dispatch] = useStoreContext();
     const [getFood,{ loading, data }] = useLazyQuery(GET_FOOD);
-    // console.log(data);
+    // const { selectedRestaurant } = state;
+    // console.log(selectedRestaurant)
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         if (!searchInput) {
@@ -32,6 +37,18 @@ const SearchFood = () => {
         console.log(restaurantData);
         return restaurantDat;
             
+    };
+
+    const handleRestaurantSelect = async (event) => {
+        // console.log(selectedRestaurant);
+        // dispatch({
+        //     type: SELECT_RESTAURANT,
+        //     value: {restaurantId: event.target.value}
+        // });
+        // console.log(selectedRestaurant);
+        localStorage.setItem('selectedRestaurant', event.target.value);
+        window.location.replace('/menu');
+
     };
 
     return (
@@ -62,7 +79,7 @@ const SearchFood = () => {
         </div>
         <Container>
             <h3 className='pt-5'>
-                {searchedFood.length ? `${searchedFood.length} restaurants` : ''}
+                {searchedFood.length ? (searchedFood.length === 1 ? `${searchedFood.length} restaurant` : `${searchedFood.length} restaurants`) : ''}
             </h3>
             <Row>
                 {searchedFood.map((restaurant) => {
@@ -75,6 +92,7 @@ const SearchFood = () => {
                                 <Card.Body>
                                     <Card.Title>{restaurant.name}</Card.Title>
                                     <Card.Text>{restaurant.description}</Card.Text>
+                                    <Button type='button' value={restaurant.id} onClick={handleRestaurantSelect}>Select</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
