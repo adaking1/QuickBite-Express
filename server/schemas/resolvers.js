@@ -5,6 +5,33 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    getMe: async (parent, args, context) => {
+      if (context.user) {
+          const user = await User.findOne({_id: context.user._id});
+          console.log(user);
+          return user;
+      }
+      throw AuthenticationError('You need to be logged in!');
+    },
+    users : async () => {
+      const users = await User.find();
+      return users;
+    },
+    user: async(parent, { username }) => {
+      return User.findOne({ username })
+        .select("-__v -password")
+        .populate("reviews")
+    },
+    reviews: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Review.find(params).sort({ createdAt: -1 });
+    },
+    review: async (parent, { reviewId }) => {
+      return Review.findOne({ _id: reviewId });
+    }, 
+    getRestaurant: async (parent, { value }) => {
+      return await Restaurant.findOne({id: value});
+    },
     getRestaurant: async (parent, { restaurantId }) => {
       return await Restaurant.findOne({_id: restaurantId});
     },
@@ -20,19 +47,8 @@ const resolvers = {
         ]
       });
     },
-    getMe: async (parent, args, context) => {
-      if (context.user) {
-          const user = await User.findOne({_id: context.user._id});
-          console.log(user);
-          return user;
-      }
-      throw AuthenticationError('You need to be logged in!');
-    },
-    users : async () => {
-      const users = await User.find();
-      return users;
-    }
   },
+  
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
@@ -52,6 +68,41 @@ const resolvers = {
 
       return { token, user };
     },
+
+    addReview: async (parent, { reviewText }, context) => {
+      if (context.user) {
+        const review = await Review.create({
+          reviewText,
+          reviewAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { reviews: review._id } }
+        );
+
+        return review;
+      }
+      throw AuthenticationError;
+      ('You need to be logged in!!!');
+    },
+    removeReview: async (parent, { reviewId }, context) => {
+      if (context.user) {
+        const review = await Review.findOneAndDelete({
+          _id: context.user._id,
+          reviewAuthor: context.user.username,
+        });
+        
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { reviews: review._id } }
+        );
+        
+        return review;
+      }
+      throw AuthenticatorError
+    }, 
+      
     removeUser: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findOneAndRemove({_id: context.user._id});

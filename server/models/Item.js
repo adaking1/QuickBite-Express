@@ -21,7 +21,7 @@ const itemSchema = new Schema({
       type: String
     },
     restaurant: {
-            type: [String],
+            type: String,
             ref: 'Restaurant',
         }
   });
