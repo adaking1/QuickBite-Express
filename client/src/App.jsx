@@ -4,6 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import Navbar from './components/Navbar';
 import { StoreProvider } from './utils/GlobalState';
+import Cart from './components/Cart';
 
 const httpLink = createHttpLink({
   uri: 'graphql'
@@ -30,6 +31,7 @@ function App() {
       <StoreProvider>
         <Navbar />
         <Outlet />
+        <Cart />
         </StoreProvider>
     </ApolloProvider>
   )

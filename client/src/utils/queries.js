@@ -55,3 +55,10 @@ query GetMe {
   }
 `;
 
+export const QUERY_CHECKOUT = gql`
+query Checkout($items: [ItemInput]) {
+  checkout(items: $items) {
+    session
+  }
+}
+`;

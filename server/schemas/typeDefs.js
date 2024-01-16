@@ -9,6 +9,10 @@ const typeDefs = `
         Reviews: [Review]
     }
 
+    type Checkout {
+        session: ID
+      }
+
     type Query {
         getMe: User 
         users: [User]
@@ -17,7 +21,18 @@ const typeDefs = `
         review(reviewId: ID!): Review
         getFood(value: String!): [Restaurant]
         getRestaurant(restaurantId: ID!): Restaurant
+        order(_id: ID!): Order
+        checkout(items: [ItemInput]): Checkout
     }
+
+    input ItemInput {
+        _id: ID
+        purchaseQuantity: Int
+        name: String
+        image: String
+        price: Float
+        quantity: Int
+      }
 
     type Restaurant {
         _id: ID
@@ -69,6 +84,7 @@ const typeDefs = `
         removeUser: User
         updateEmail(newEmail: String!): Auth
         updateUsername(newUsername: String!): Auth
+        addOrder(items: [ID]!): Order
 
     }
 
@@ -76,6 +92,12 @@ const typeDefs = `
         token: ID!
         user: User
     }
+
+    type Order {
+        _id: ID
+        purchaseDate: String
+        items: [Item]
+      }
 `
 
 module.exports = typeDefs;
