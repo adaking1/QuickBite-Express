@@ -4,6 +4,8 @@ import { useStoreContext } from '../utils/GlobalState';
 import Auth from '../utils/auth';
 import { useLazyQuery } from '@apollo/client';
 import { GET_FOOD } from '../utils/queries';
+import { Link } from 'react-router-dom';
+// import { useGetFood } from '../utils/helpers'
 import RestaurantPage from './RestaurantPage';
 import { SELECT_RESTAURANT } from '../utils/actions';
 
