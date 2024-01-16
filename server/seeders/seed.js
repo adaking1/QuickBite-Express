@@ -14,40 +14,15 @@ db.once('open', async () => {
         await cleanDB('Restaurant', 'restaurants');
         await cleanDB('Order', 'orders');
         await cleanDB('Item', 'items');
-
-        await User.create(userSeeds);
-        await Order.create(orderSeeds);
         
+        // Seeding Users
+        await User.create(userSeeds);
+
+        // Seeding Orders
+        await Order.create(orderSeeds);
+
         // Seeding Restaurants
-        const createdRestaurants = await Restaurant.create(restaurantSeeds);
-
-    // Seeding items to Restaurants through restaurantId
-        for (let i = 0; i < itemSeeds.length; i++) {
-            const { restaurantId, ...itemData } = itemSeeds[i];
-
-    // Find the restaurants with the specified restaurantIds
-            const existingRestaurants = await Restaurant.find({ restaurantId: restaurantId });
-
-            if (!existingRestaurants || existingRestaurants.length === 0) {
-            console.error(`No matching restaurants found for IDs ${restaurantIds}. Skipping item creation.`);
-            continue;
-            }
-
-            const createdItem = await Item.create({
-            ...itemData,
-            restaurants: existingRestaurants.map(restaurant => restaurant._id),
-        });
-
-    // Update each restaurant to include the created item
-            for (const restaurant of existingRestaurants) {
-            await Restaurant.findByIdAndUpdate(
-                restaurant._id,
-            {
-                $addToSet: { items: createdItem._id },
-            }
-        );
-    }
-}
+        await Restaurant.create(restaurantSeeds);
 
         // Seeding items to Restaurants through restaurantId
         for (let i = 0; i < itemSeeds.length; i++) {
@@ -85,14 +60,14 @@ db.once('open', async () => {
                 console.error(`Restaurant with name ${restaurant} not found. Skipping review creation.`);
                 continue;
             }
-        
+
             // Create the review with the associated restaurant
             const { _id } = await Review.create({
                 reviewText,
                 reviewAuthor,
                 restaurant: existingRestaurant._id,
             });
-        
+
             // Find the user and update their reviews
             const user = await User.findOneAndUpdate(
                 { username: reviewAuthor },
