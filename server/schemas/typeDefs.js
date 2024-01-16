@@ -3,6 +3,7 @@ const typeDefs = `
         _id: ID
         username: String
         email: String
+        password: String
         restaurantCount: Int
         savedRestaurants: [Restaurant]
         Reviews: [Review]
@@ -14,30 +15,31 @@ const typeDefs = `
         user(username: String!): User 
         reviews(username: String!):[Review]
         review(reviewId: ID!): Review
-        getFood(restaurantInput: RestaurantInput): [Restaurant]
-        getRestaurant(id: ID!): Restaurant
+        getFood(value: String!): [Restaurant]
+        getRestaurant(restaurantId: ID!): Restaurant
     }
 
     type Restaurant {
         _id: ID
         restaurantId: ID
-        name: String
-        description: String
-        image: String
+        restaurantName: String
+        restaurantDescription: String
+        restaurantImage: String
         location: String
         Items: [Item]    
     }
 
     input RestaurantInput {
-        restaurantId: String!
-        name: String!
-        description: String 
-        image: String!
+        _id: ID
+        restaurantId: String
+        restaurantName: String
+        item: String
         location: String
-        cuisine: String!
+        cuisine: String
     }
 
     type Item {
+        _id: ID
         name: String!
         description: String
         image: String! 
@@ -57,12 +59,18 @@ const typeDefs = `
     }
 
     type Mutation {
-        loginUser(email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         saveRestaurant(restaurantInput: RestaurantInput): User
+
+        saveRestaurant(restaurantId: ID!, name: String!): User
         removeRestaurant(restaurantId: ID!): User
+        addRestaurant(restaurantID: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review
+        removeUser: User
+        updateEmail(newEmail: String!): Auth
+        updateUsername(newUsername: String!): Auth
 
     }
 

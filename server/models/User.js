@@ -19,10 +19,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    savedRestaurants: [{
-      type: Schema.Types.ObjectId,
+    savedRestaurants: {
+      type: Schema.Types.Array,
       ref: 'Restaurant'
-    }],
+    },
     reviews: [{
       type: Schema.Types.ObjectId,
       ref: 'Review'

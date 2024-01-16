@@ -1,16 +1,21 @@
+// const { signToken, AuthenticationError } = require('../utils/auth');
+// const { Restaurant, Item, User, Review, Order } = require('../models');
+const { Restaurant, Item, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-const { Restaurant, Item, User, Review, Order } = require('../models');
 
 const resolvers = {
   Query: {
     getMe: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('reviews')
+          const user = await User.findOne({_id: context.user._id});
+          console.log(user);
+          return user;
       }
-      throw AuthenticationError;
+      throw AuthenticationError('You need to be logged in!');
     },
-    users: async () => {
-      return User.find(),select("-__v -password").populate("reviews");
+    users : async () => {
+      const users = await User.find();
+      return users;
     },
     user: async(parent, { username }) => {
       return User.findOne({ username })
@@ -27,36 +32,40 @@ const resolvers = {
     getRestaurant: async (parent, { value }) => {
       return await Restaurant.findOne({id: value});
     },
+    getRestaurant: async (parent, { restaurantId }) => {
+      return await Restaurant.findOne({_id: restaurantId});
+    },
     getFood: async (parent, { value }) => {
+      // console.log(value);
+      // return await Restaurant.find({restaurantName: value});
       return await Restaurant.find({
         $or: [
-          {name: value},
+          {restaurantName: value},
           {location: value},
-          {item: {$elemMatch: value}},
+          {item: {$elemMatch: {itemName: value}}},
           {cuisine: value}
         ]
       });
     },
-    
   },
-
+  
   Mutation: {
-    loginUser: async (parent, { email, password}) => {
-      const user = await User.findOne({ email });
-      if(!user) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
-      const correctPw = await user.isCorrectPassword(password);
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
-
-    addUser: async (parent, args) => {
-      const user  = await User.create(args);
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+          throw AuthenticationError;
+      }
+      const correctPassword = await user.isCorrectPassword(password);
+      if (!correctPassword) {
+          throw AuthenticationError;
+      }
       const token = signToken(user);
+
       return { token, user };
     },
 
@@ -77,45 +86,67 @@ const resolvers = {
       throw AuthenticationError;
       ('You need to be logged in!!!');
     },
-
-    saveRestaurant: async (parent, { restaurantInput }, context) => {
+    removeReview: async (parent, { reviewId }, context) => {
       if (context.user) {
-        const restaurant = await User.findByIdAndUpdate(
+        const review = await Review.findOneAndDelete({
+          _id: context.user._id,
+          reviewAuthor: context.user.username,
+        });
+        
+        await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $push: { savedRestaurants: restaurantInput } },
-          { new: true }
+          { $pull: { reviews: review._id } }
         );
-        return restaurant
+        
+        return review;
+      }
+      throw AuthenticatorError
+    }, 
+      
+    removeUser: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findOneAndRemove({_id: context.user._id});
+        return user;
+      }
+      throw AuthenticationError;
+      
+    },
+    saveRestaurant: async (parent, { restaurantId, name }, context) => {
+      if (context.user) { 
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$addToSet: {savedRestaurants: { _id: restaurantId, restaurantName: name }}},
+          {new: true}
+        );
+        return user;
       }
       throw AuthenticationError;
     },
-
-    removeRestaurant: async (parent, args, context) => {
+    removeRestaurant: async (parent, { restaurantId }, context) => {
       if (context.user) {
-        const restaurant = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedRestaurants: args } },
-          { new: true }
+        return User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$pull: {savedRestaurants: {_id: restaurantId}}},
+          {new: true}
         );
-
-        return restaurant;
       }
       throw AuthenticationError;
     },
-
-    removeRestaurant: async (parent, args, context) => {
+    updateEmail: async (parent, { newEmail }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedRestaurants: {restaurantId: args.restaurantId } } },
-          { new: true }
-        );
-        return updatedUser;
+        const user = await User.findOneAndUpdate({_id: context.user._id}, {email: newEmail});
+        return user;
       }
-      throw AuthenticationError
+      throw AuthenticationError;
+    },
+    updateUsername: async (parent, { newUsername }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate({_id: context.user._id}, {username: newUsername})
+        return user;
+      }
+      throw AuthenticationError;
     }
-
-  },
+  }
 };
 
 module.exports = resolvers;
