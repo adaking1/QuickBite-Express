@@ -59,7 +59,7 @@ const typeDefs = `
     type Mutation {
         loginUser(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveRestaurant(restaurantinput: RestaurantInput): User
+        saveRestaurant(restaurantInput: RestaurantInput): User
         removeRestaurant(restaurantId: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review

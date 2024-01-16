@@ -17,6 +17,13 @@ const resolvers = {
         .select("-__v -password")
         .populate("reviews")
     },
+    reviews: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Review.find(params).sort({ createdAt: -1 });
+    },
+    review: async (parent, { reviewId }) => {
+      return Review.findOne({ _id: reviewId });
+    }, 
     getRestaurant: async (parent, { value }) => {
       return await Restaurant.findOne({id: value});
     },
@@ -30,26 +37,7 @@ const resolvers = {
         ]
       });
     },
-    getItems: async (parent, { restaurantId }) => {
-      try {
-        // Find the restaurant with the specified ID
-        const restaurant = await Restaurant.findOne({ _id: restaurantId });
-
-        if (!restaurant) {
-          throw new Error('Restaurant not found');
-        }
-
-        // Find the items associated with the restaurant
-        const items = await Item.find({ _id: { $in: restaurant.items } });
-
-        return items;
-      } catch (error) {
-        throw error;
-      }
-    },
     
-  
-
   },
 
   Mutation: {
@@ -71,6 +59,61 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
+    addReview: async (parent, { reviewText }, context) => {
+      if (context.user) {
+        const review = await Review.create({
+          reviewText,
+          reviewAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { reviews: review._id } }
+        );
+
+        return review;
+      }
+      throw AuthenticationError;
+      ('You need to be logged in!!!');
+    },
+
+    saveRestaurant: async (parent, { restaurantInput }, context) => {
+      if (context.user) {
+        const restaurant = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedRestaurants: restaurantInput } },
+          { new: true }
+        );
+        return restaurant
+      }
+      throw AuthenticationError;
+    },
+
+    removeRestaurant: async (parent, args, context) => {
+      if (context.user) {
+        const restaurant = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedRestaurants: args } },
+          { new: true }
+        );
+
+        return restaurant;
+      }
+      throw AuthenticationError;
+    },
+
+    removeRestaurant: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedRestaurants: {restaurantId: args.restaurantId } } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw AuthenticationError
+    }
 
   },
 };
