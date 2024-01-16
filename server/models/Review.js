@@ -19,6 +19,11 @@ const reviewSchema = new Schema ({
         ref: 'Restaurant',
         required: true,
       },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      }
 });
 
 const Review = model('Review', reviewSchema)

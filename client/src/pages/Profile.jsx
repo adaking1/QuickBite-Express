@@ -12,24 +12,24 @@ const Profile = () => {
     const { loading, data } = useQuery(GET_ME);
     const [deleteRestaurant, { deleteRestError }] = useMutation(REMOVE_RESTAURANT);
     const [deleteUser, { deleteUserError }] = useMutation(REMOVE_USER);
-    // const [updateEmail, { emailError }] = useMutation(UPDATE_EMAIL);
-    // const [updateUsername, { usernameError }] = useMutation(UPDATE_USERNAME);
     const [showModal, setShowModal] = useState(false);
 
     const userData = data?.getMe || {};
+    console.log(userData);
     if (userData.savedRestaurants) {
         const restaurantIds = [];
-        userData.savedRestaurants.map((restaurant) => restaurantIds.push(restaurant.restaurantId));
+        userData.savedRestaurants.map((restaurant) => restaurantIds.push(restaurant._id));
         localStorage.setItem('saved_restaurants', JSON.stringify(restaurantIds));
     }
 
     const handleDeleteRestaurant = async (restaurantId) => {
+        console.log(restaurantId)
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
             return false;
         }
         try {
-            const { data } = await deleteRestaurant({
+            const data = await deleteRestaurant({
                 variables: { restaurantId }
             });
             removeRestaurantId(restaurantId);
@@ -75,10 +75,10 @@ const Profile = () => {
                 <Row>
                     {userData.savedRestaurants.map((restaurant) => {
                         return (
-                            <Col key={restaurant.restaurantId} md='4'>
+                            <Col key={restaurant._id} md='4'>
                                 <h4>{restaurant.restaurantName}</h4>
-                                <Button className='btn-block btn-danger' onClick={() => handleDeleteRestaurant(restaurant.restaurantId)}>
-                                Remove from saved
+                                <Button className='btn-block btn-danger' onClick={() => handleDeleteRestaurant(restaurant._id)}>
+                                Remove
                                 </Button>
                             </Col>
                         )

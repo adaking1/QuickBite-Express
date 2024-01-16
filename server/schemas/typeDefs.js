@@ -30,6 +30,7 @@ const typeDefs = `
     }
 
     input RestaurantInput {
+        _id: ID
         restaurantId: String
         restaurantName: String
         item: String
@@ -60,8 +61,11 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveRestaurant(restaurantId: ID!): User
+        saveRestaurant(restaurantInput: RestaurantInput): User
+
+        saveRestaurant(restaurantId: ID!, name: String!): User
         removeRestaurant(restaurantId: ID!): User
+        addRestaurant(restaurantID: ID!): User
         addReview(reviewText: String!): Review
         removeReview(reviewId: ID!): Review
         removeUser: User
