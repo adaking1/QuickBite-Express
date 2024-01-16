@@ -5,7 +5,7 @@
         "restaurantDescription":"Place to go get good and quick food",
         "restaurantImage": "INSERT MCDONALDS LOGO",
         "location":"Anywhere in the US",
-        "items": ["3"]
+        "itemsId": ["1", "2", "3"]
     },
     {
         "restaurantName": "Chick fil a ",
@@ -59,16 +59,16 @@
         "location":"United States"
     },
     {
-        "restaurantName": "Panera",
+        "restaurantName": "Five Guys",
         "restaurantId": "9",
-        "restaurantDescription":"Healthy spin on classics like mac and cheese",
-        "restaurantImage": "INSERT Panera LOGO",
+        "restaurantDescription":"Burgers and fries the old fashioned way",
+        "restaurantImage": "INSERT FIVE GUYS LOGO",
         "location":"United States"
     },
     {
         "restaurantName": "Subway",
         "restaurantId": "10",
-        "restaurantDescription":"The original ",
+        "restaurantDescription":"The original sub place ",
         "restaurantImage": "INSERT MOES LOGO",
         "location":"United States"
     },
@@ -92,13 +92,5 @@
         "restaurantDescription":"A southern style steakhouse",
         "restaurantImage": "INSERT TEXAS LOGO",
         "location":"United States"
-    },
-    {
-        "restaurantName": "Five Guys",
-        "restaurantId": "14",
-        "restaurantDescription":"High quality and big portioned burger place",
-        "restaurantImage": "INSERT FIVE LOGO",
-        "location":"United States"
     }
-
 ]
