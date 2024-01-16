@@ -23,10 +23,10 @@ db.once('open', async () => {
 
     // Seeding items to Restaurants through restaurantId
         for (let i = 0; i < itemSeeds.length; i++) {
-            const { restaurantIds, ...itemData } = itemSeeds[i];
+            const { restaurantId, ...itemData } = itemSeeds[i];
 
     // Find the restaurants with the specified restaurantIds
-            const existingRestaurants = await Restaurant.find({ restaurantId: { $in: restaurantIds } });
+            const existingRestaurants = await Restaurant.find({ restaurantId: restaurantId });
 
             if (!existingRestaurants || existingRestaurants.length === 0) {
             console.error(`No matching restaurants found for IDs ${restaurantIds}. Skipping item creation.`);
@@ -76,13 +76,13 @@ db.once('open', async () => {
         }
 
         for (let i = 0; i < reviewSeeds.length; i++) {
-            const { reviewText, reviewAuthor, restaurant: restaurantId } = reviewSeeds[i];
+            const { reviewText, reviewAuthor, restaurant } = reviewSeeds[i];
         
             // Find the restaurant with the specified restaurantId
-            const existingRestaurant = await Restaurant.findOne({ restaurantId });
+            const existingRestaurant = await Restaurant.findOne({ restaurantName: restaurant });
         
             if (!existingRestaurant) {
-                console.error(`Restaurant with ID ${restaurantId} not found. Skipping review creation.`);
+                console.error(`Restaurant with name ${restaurant} not found. Skipping review creation.`);
                 continue;
             }
         

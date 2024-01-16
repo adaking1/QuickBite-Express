@@ -62,3 +62,14 @@ query Checkout($items: [ItemInput]) {
   }
 }
 `;
+
+export const GET_ITEM = gql `
+query Item($id: ID!) {
+  item(_id: $id) {
+    _id
+    name
+    price
+    description
+  }
+}
+`;

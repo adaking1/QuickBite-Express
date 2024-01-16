@@ -21,9 +21,9 @@ const itemSchema = new Schema({
       type: String
     },
     restaurant: {
-            type: String,
-            ref: 'Restaurant',
-        }
+      type: String,
+      ref: 'Restaurant',
+    }
   });
 
   const Item = model('Item', itemSchema);

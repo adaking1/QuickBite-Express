@@ -23,6 +23,7 @@ const typeDefs = `
         getRestaurant(restaurantId: ID!): Restaurant
         order(_id: ID!): Order
         checkout(items: [ItemInput]): Checkout
+        item(_id: ID!): Item
     }
 
     input ItemInput {

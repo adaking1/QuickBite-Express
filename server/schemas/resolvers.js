@@ -29,11 +29,11 @@ const resolvers = {
     review: async (parent, { reviewId }) => {
       return Review.findOne({ _id: reviewId });
     }, 
-    getRestaurant: async (parent, { value }) => {
-      return await Restaurant.findOne({id: value});
-    },
     getRestaurant: async (parent, { restaurantId }) => {
       return await Restaurant.findOne({_id: restaurantId});
+    },
+    item: async (parent, { id }) => {
+      return await Item.findOne({_id: id});
     },
     getFood: async (parent, { value }) => {
       // console.log(value);
