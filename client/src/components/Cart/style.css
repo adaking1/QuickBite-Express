@@ -1,0 +1,41 @@
+.cart .close:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cart-closed:hover {
+    transform: rotate(25deg);
+    cursor: pointer;
+}
+
+.cart-closed {
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: .25rem;
+    width: 50px;
+    height: 50px;
+}
+
+.cart input {
+    width: 50px;
+    padding: 0;
+    margin: 0 .5rem 1rem 0;
+}
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 20%;
+    max-width: 30%;
+    max-height: 60%;
+    background-color: lightblue;
+    overflow: auto;
+    padding: .5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
+    border-bottom-left-radius: .5rem;
+  }

@@ -1,21 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
-import { useStoreContext } from '../utils/GlobalState';
-import Auth from '../utils/auth';
 import { useLazyQuery } from '@apollo/client';
 import { GET_FOOD } from '../utils/queries';
-// import { Link } from 'react-router-dom';
-// import { useGetFood } from '../utils/helpers'
-// import RestaurantPage from './RestaurantPage';
-// import { SELECT_RESTAURANT } from '../utils/actions';
+
 
 const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-    // const [state, dispatch] = useStoreContext();
     const [getFood,{ loading, data }] = useLazyQuery(GET_FOOD);
-    // const { selectedRestaurant } = state;
-    // console.log(selectedRestaurant)
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         if (!searchInput) {
@@ -42,13 +34,6 @@ const SearchFood = () => {
     };
 
     const handleRestaurantSelect = async (event) => {
-        console.log(event.target)
-        // console.log(selectedRestaurant);
-        // dispatch({
-        //     type: SELECT_RESTAURANT,
-        //     value: {restaurantId: event.target.value}
-        // });
-        // console.log(selectedRestaurant);
         localStorage.setItem('selectedRestaurantName', event.target.value);
         localStorage.setItem('selectedRestaurantId', event.target.id);
         window.location.replace('/menu');
@@ -57,7 +42,7 @@ const SearchFood = () => {
 
     return (
         <>
-        <div className='text-light bg-dark p-5'>
+        <div id='search' className='text-light bg-dark p-5'>
             <Container>
                 <h2>Search for food!</h2>
                 <Form onSubmit={handleFormSubmit}>
@@ -88,7 +73,7 @@ const SearchFood = () => {
             <Row>
                 {searchedFood.map((restaurant) => {
                     return (
-                        <Col md='4' key={restaurant.id}>
+                        <Col id='searchedRestaurants' md='4' key={restaurant.id}>
                             <Card border='dark'>
                                 {restaurant.image ? (
                                     <Card.Img src={restaurant.image} alt={`Image for ${restaurant.name}`} variant='top' />

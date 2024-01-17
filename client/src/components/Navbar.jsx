@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import Auth from '../utils/auth';
+import { useStoreContext } from '../utils/GlobalState';
+import { CLEAR_CART } from '../utils/actions';
 
 const AppNavbar = () => {
     const [showModal, setShowModal] = useState(false);
+    // const [state, dispatch] = useStoreContext();
+    // const logout = Auth.logout();
+
+    // useEffect(() => {
+    //   dispatch({ type: CLEAR_CART })
+    // }, [logout]);
 
     return (
         <>
-          <Navbar bg='dark' variant='dark' expand='lg'>
+          <Navbar id='nav' bg='dark' variant='dark' expand='lg'>
             <Container fluid>
               <Navbar.Brand as={Link} to='/'>
                 QuickBite Express

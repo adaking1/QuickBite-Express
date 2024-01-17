@@ -1,0 +1,7 @@
+<svg 
+        width="290"
+        height="200"
+        xmlns="http://www.w3.org/2000/svg">
+        <circle cx="150" cy="100" r="100" fill="darkslategrey"/>
+        <text x="150" y="120" text-anchor="middle" font-size="60" fill="palegreen">QBE</text>
+        </svg>
