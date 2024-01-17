@@ -4,10 +4,10 @@ import { useStoreContext } from '../utils/GlobalState';
 import Auth from '../utils/auth';
 import { useLazyQuery } from '@apollo/client';
 import { GET_FOOD } from '../utils/queries';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import { useGetFood } from '../utils/helpers'
-import RestaurantPage from './RestaurantPage';
-import { SELECT_RESTAURANT } from '../utils/actions';
+// import RestaurantPage from './RestaurantPage';
+// import { SELECT_RESTAURANT } from '../utils/actions';
 
 const SearchFood = () => {
     const [searchedFood, setSearchedFood] = useState([]);
@@ -42,13 +42,15 @@ const SearchFood = () => {
     };
 
     const handleRestaurantSelect = async (event) => {
+        console.log(event.target)
         // console.log(selectedRestaurant);
         // dispatch({
         //     type: SELECT_RESTAURANT,
         //     value: {restaurantId: event.target.value}
         // });
         // console.log(selectedRestaurant);
-        localStorage.setItem('selectedRestaurant', event.target.value);
+        localStorage.setItem('selectedRestaurantName', event.target.value);
+        localStorage.setItem('selectedRestaurantId', event.target.id);
         window.location.replace('/menu');
 
     };
@@ -94,7 +96,7 @@ const SearchFood = () => {
                                 <Card.Body>
                                     <Card.Title>{restaurant.name}</Card.Title>
                                     <Card.Text>{restaurant.description}</Card.Text>
-                                    <Button type='button' value={restaurant.id} onClick={handleRestaurantSelect}>Select</Button>
+                                    <Button type='button' value={restaurant.name} id={restaurant.id} onClick={handleRestaurantSelect}>Select</Button>
                                 </Card.Body>
                             </Card>
                         </Col>

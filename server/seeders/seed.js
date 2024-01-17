@@ -3,7 +3,6 @@ const { User, Review, Restaurant, Order, Item } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const reviewSeeds = require('./reviewSeeds.json');
 const restaurantSeeds = require('./restaurantSeeds.json');
-const orderSeeds = require('./orderSeeds.json');
 const itemSeeds = require('./itemSeeds.json');
 const cleanDB = require('./cleanDB')
 
@@ -12,22 +11,17 @@ db.once('open', async () => {
         await cleanDB('User', 'users');
         await cleanDB('Review', 'reviews');
         await cleanDB('Restaurant', 'restaurants');
-        await cleanDB('Order', 'orders');
         await cleanDB('Item', 'items');
+
+        // Seeding Restaurants
+        await Restaurant.create(restaurantSeeds);
         
         // Seeding Users
         await User.create(userSeeds);
 
-        // Seeding Orders
-        await Order.create(orderSeeds);
-
-        // Seeding Restaurants
-        await Restaurant.create(restaurantSeeds);
-
         // Seeding items to Restaurants through restaurantId
         for (let i = 0; i < itemSeeds.length; i++) {
             const { restaurantId, ...itemData } = itemSeeds[i];
-
             const existingRestaurant = await Restaurant.findOne({ restaurantId });
 
             if (!existingRestaurant) {
@@ -35,29 +29,27 @@ db.once('open', async () => {
                 continue;
             }
 
-            const { _id: itemId } = await Item.create({
+            const data = await Item.create({
                 ...itemData,
-                restaurant: existingRestaurant._id,
+                restaurantId: existingRestaurant._id,
             });
+            console.log(data);
 
             const restaurant = await Restaurant.findOneAndUpdate(
                 { _id: existingRestaurant._id },
-                {
-                    $addToSet: {
-                        items: itemId,
-                    },
-                }
+                {$addToSet: {items: data.itemId}}
             );
+            console.log(restaurant);
         }
 
         for (let i = 0; i < reviewSeeds.length; i++) {
-            const { reviewText, reviewAuthor, restaurantId } = reviewSeeds[i];
-
+            const { reviewText, reviewAuthor, restaurant } = reviewSeeds[i];
+        
             // Find the restaurant with the specified restaurantId
-            const existingRestaurant = await Restaurant.findOne({ restaurantId });
-
+            const existingRestaurant = await Restaurant.findOne({ restaurantName: restaurant });
+        
             if (!existingRestaurant) {
-                console.error(`Restaurant with ID ${restaurantId} not found. Skipping review creation.`);
+                console.error(`Restaurant with name ${restaurant} not found. Skipping review creation.`);
                 continue;
             }
 

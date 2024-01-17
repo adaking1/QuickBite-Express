@@ -55,3 +55,33 @@ query GetMe {
   }
 `;
 
+export const QUERY_CHECKOUT = gql`
+query Checkout($items: [ItemInput]) {
+  checkout(items: $items) {
+    session
+  }
+}
+`;
+
+export const GET_ITEM = gql `
+query Item($itemId: ID!) {
+  item(itemId: $itemId) {
+    name
+    price
+    description
+    image
+  }
+}
+`;
+
+export const MENU_ITEMS = gql `
+query MenuItems($restaurantId: ID!) {
+  menuItems(restaurantId: $restaurantId) {
+    _id
+    itemId
+    name
+    price
+    description
+  }
+}
+`;

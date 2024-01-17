@@ -5,22 +5,29 @@ import {
     ADD_MULTIPLE_TO_CART,
     CLEAR_CART,
     TOGGLE_CART,
-    SELECT_RESTAURANT
+    SELECT_RESTAURANT,
+    UPDATE_ITEMS
 } from './actions';
 
 export const reducer = (state, action) => {
+    console.log(action);
     switch (action.type) {
+        case UPDATE_ITEMS:
+            return {
+                ...state,
+                items: [...action.items]
+            }
         case ADD_TO_CART:
             return {
                 ...state,
                 cartOpen: true,
-                cart: [...state.cart, ...action.items]
+                cart: [...state.cart, action.item]
             };
         case ADD_MULTIPLE_TO_CART:
             return {
                 ...state,
-                cart: [...state.cart, ...action.products],
-      };
+                cart: [...state.cart, ...action.items],
+            };
         case UPDATE_CART_QUANTITY:
             return {
                 ...state,
@@ -36,7 +43,6 @@ export const reducer = (state, action) => {
             let newState = state.cart.filter((item) => {
                 return item._id !== action._id;
             });
-          
             return {
                 ...state,
                 cartOpen: newState.length > 0,
