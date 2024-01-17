@@ -61,23 +61,24 @@ const Profile = () => {
 
     return (
         <>
-            <div fluid="true" className="text-light bg-dark p-5">
+            <div fluid="true" id='profileName' className="text-light bg-dark p-5">
                 <Container>
                 <h2>{userData.username}'s Profile</h2>
                 </Container>
             </div>
+            <div id='profileInfo'>
             <Container>
                 <h3>
                 {userData.savedRestaurants.length
                 ? `${userData.savedRestaurants.length} saved ${userData.savedRestaurants.length === 1 ? 'restaurant' : 'restaurants'}:`
                 : 'No saved restaurants'}
                 </h3>
-                <Row>
+                <Row id='profileSaved'>
                     {userData.savedRestaurants.map((restaurant) => {
                         return (
                             <Col key={restaurant._id} md='4'>
                                 <h4>{restaurant.restaurantName}</h4>
-                                <Button className='btn-block btn-danger' onClick={() => handleDeleteRestaurant(restaurant._id)}>
+                                <Button className='btn-block btn-dark' onClick={() => handleDeleteRestaurant(restaurant._id)}>
                                 Remove
                                 </Button>
                             </Col>
@@ -85,27 +86,27 @@ const Profile = () => {
                     })}
                 </Row>
             </Container>
-            <Container>
+            <Container id='accountInfo'>
                 <h3>Account Information</h3>
                 <Row>
                     <div>
                         <h4>Username: {userData.username}</h4>
                         <h4>Email: {userData.email}</h4>
-                        <Button className='btn-block btn-danger' onClick={() => setShowModal(true)}>
+                        <Button className='btn-block btn-dark' onClick={() => setShowModal(true)}>
                             Update Account Information
                         </Button>
                     </div>
                 </Row>
-                <Button className='btn-block btn-danger' onClick={() => handleDeleteUser()}>
+            </Container>
+            </div>
+            <Button id='deleteAccount' className='btn-block btn-danger' onClick={() => handleDeleteUser()}>
                     Delete Account
                 </Button>
-            </Container>
             <Modal
             size='lg'
             show={showModal}
             onHide={() => setShowModal(false)}
             aria-labelledby='update-modal'>
-            {/* tab container to do either signup or login component */}
             <Tab.Container defaultActiveKey='username'>
                 <Modal.Header closeButton>
                 </Modal.Header>

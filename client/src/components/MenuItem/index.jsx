@@ -37,7 +37,7 @@ function FoodItem(item) {
                 <Card.Title>{item.name}</Card.Title>
                 <Card.Text>{item.price}</Card.Text>
                 <Card.Text>{item.description}</Card.Text>
-                <Button type='button' onClick={addToCart}>Add to Cart</Button>
+                <Button variant='success' type='button' onClick={addToCart}>Add to Cart</Button>
             </Card.Body>
         </Card>
     );

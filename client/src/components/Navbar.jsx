@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import Auth from '../utils/auth';
+import { useStoreContext } from '../utils/GlobalState';
+import { CLEAR_CART } from '../utils/actions';
 
 const AppNavbar = () => {
     const [showModal, setShowModal] = useState(false);
+    // const [state, dispatch] = useStoreContext();
+    // const logout = Auth.logout();
+
+    // useEffect(() => {
+    //   dispatch({ type: CLEAR_CART })
+    // }, [logout]);
 
     return (
         <>
-          <Navbar bg='dark' variant='dark' expand='lg'>
+          <Navbar id='nav' bg='success' variant='dark' expand='lg'>
             <Container fluid>
               <Navbar.Brand as={Link} to='/'>
                 QuickBite Express
@@ -18,12 +26,12 @@ const AppNavbar = () => {
               <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
                 <Nav className='ml-auto d-flex'>
                   <Nav.Link as={Link} to='/'>
-                    Search For Food
+                    Search
                   </Nav.Link>
                   {Auth.loggedIn() ? (
                     <>
                       <Nav.Link as={Link} to='/profile'>
-                        View Profile
+                        Profile
                       </Nav.Link>
                       <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                     </>
