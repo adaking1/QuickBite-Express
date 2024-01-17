@@ -75,9 +75,9 @@ const SearchFood = () => {
                     return (
                         <Col id='searchedRestaurants' md='4' key={restaurant.id}>
                             <Card border='dark' bg='light'>
-                                {restaurant.image ? (
+                                {/* {restaurant.image ? (
                                     <Card.Img src={restaurant.image} alt={`Image for ${restaurant.name}`} variant='top' />
-                                ) : null}
+                                ) : null} */}
                                 <Card.Body>
                                     <Card.Title>{restaurant.name}</Card.Title>
                                     <Card.Text>{restaurant.description}</Card.Text>
