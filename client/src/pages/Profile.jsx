@@ -97,9 +97,6 @@ const Profile = () => {
                         </Button>
                     </div>
                 </Row>
-                {/* <Button className='btn-block btn-danger' onClick={() => handleDeleteUser()}>
-                    Delete Account
-                </Button> */}
             </Container>
             </div>
             <Button id='deleteAccount' className='btn-block btn-danger' onClick={() => handleDeleteUser()}>
@@ -110,7 +107,6 @@ const Profile = () => {
             show={showModal}
             onHide={() => setShowModal(false)}
             aria-labelledby='update-modal'>
-            {/* tab container to do either signup or login component */}
             <Tab.Container defaultActiveKey='username'>
                 <Modal.Header closeButton>
                 </Modal.Header>
