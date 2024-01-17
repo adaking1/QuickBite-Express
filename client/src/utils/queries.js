@@ -64,9 +64,21 @@ query Checkout($items: [ItemInput]) {
 `;
 
 export const GET_ITEM = gql `
-query Item($id: ID!) {
-  item(_id: $id) {
+query Item($itemId: ID!) {
+  item(itemId: $itemId) {
+    name
+    price
+    description
+    image
+  }
+}
+`;
+
+export const MENU_ITEMS = gql `
+query MenuItems($restaurantId: ID!) {
+  menuItems(restaurantId: $restaurantId) {
     _id
+    itemId
     name
     price
     description

@@ -1,7 +1,6 @@
-// const { signToken, AuthenticationError } = require('../utils/auth');
-// const { Restaurant, Item, User, Review, Order } = require('../models');
-const { Restaurant, Item, User } = require('../models');
+const { Restaurant, Item, User, Order } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
@@ -31,9 +30,14 @@ const resolvers = {
     }, 
     getRestaurant: async (parent, { restaurantId }) => {
       return await Restaurant.findOne({_id: restaurantId});
+      
     },
-    item: async (parent, { id }) => {
-      return await Item.findOne({_id: id});
+    menuItems: async (parent, { restaurantId }) => {
+      return await Item.find({restaurantId});
+      
+    },
+    item: async (parent, { itemId }) => {
+      return await Item.findOne({_id: itemId});
     },
     getFood: async (parent, { value }) => {
       // console.log(value);
@@ -42,10 +46,43 @@ const resolvers = {
         $or: [
           {restaurantName: value},
           {location: value},
-          {item: {$elemMatch: {itemName: value}}},
+          {items: {$elemMatch: {itemName: value}}},
           {cuisine: value}
         ]
       });
+    },
+    checkout: async (parent, args, context) => {
+      console.log(args);
+      console.log('XXXXXXXXXX')
+      const url = new URL(context.headers.referer).origin;
+      // We map through the list of products sent by the client to extract the _id of each item and create a new Order.
+      await Order.create({ items: args.items.map(({ _id }) => _id) });
+      const line_items = [];
+
+      for (const item of args.items) {
+        // console.log(item)
+        line_items.push({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: item.name,
+              description: item.description,
+            },
+            unit_amount: item.price * 100,
+          },
+          quantity: item.purchaseQuantity,
+        });
+      }
+      console.log(line_items);
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+      });
+
+      return { session: session.id };
     },
   },
   

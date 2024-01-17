@@ -23,16 +23,16 @@ const typeDefs = `
         getRestaurant(restaurantId: ID!): Restaurant
         order(_id: ID!): Order
         checkout(items: [ItemInput]): Checkout
-        item(_id: ID!): Item
+        item(itemId: ID!): Item
+        menuItems(restaurantId: ID!): [Item]
     }
 
     input ItemInput {
         _id: ID
         purchaseQuantity: Int
         name: String
-        image: String
         price: Float
-        quantity: Int
+        description: String
       }
 
     type Restaurant {
@@ -60,7 +60,8 @@ const typeDefs = `
         description: String
         image: String! 
         price: Float!
-        Restaurants: [Restaurant]
+        restaurantId: String!
+        itemId: String
     }
 
     type Cuisine {
@@ -90,7 +91,7 @@ const typeDefs = `
     }
 
     type Auth {
-        token: ID!
+        token: ID
         user: User
     }
 

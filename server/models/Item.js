@@ -1,15 +1,15 @@
 const { Schema, model } = require('mongoose')
 
 const itemSchema = new Schema({
-    itemName: {
+    name: {
       type: String,
       required: true,
       trim: true
     },
-    itemDescription: {
+    description: {
       type: String
     },
-    itemImage: {
+    image: {
       type: String
     },
     price: {
@@ -20,7 +20,7 @@ const itemSchema = new Schema({
     itemId: {
       type: String
     },
-    restaurant: {
+    restaurantId: {
       type: String,
       ref: 'Restaurant',
     }
