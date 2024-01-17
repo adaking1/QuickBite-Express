@@ -35,6 +35,22 @@ a:hover {
   width: 100%;
 }
 
+#profileName {
+  border-radius: 0 0 8px 8px;
+}
+
+#profileInfo {
+  display: flex;
+}
+
+#deleteAccount {
+  margin: 55px;
+}
+
+#profileSaved {
+  flex-direction: column;
+}
+
 body {
   margin: 0;
   display: flex;

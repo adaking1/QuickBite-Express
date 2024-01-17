@@ -74,14 +74,14 @@ const SearchFood = () => {
                 {searchedFood.map((restaurant) => {
                     return (
                         <Col id='searchedRestaurants' md='4' key={restaurant.id}>
-                            <Card border='dark'>
+                            <Card border='dark' bg='light'>
                                 {restaurant.image ? (
                                     <Card.Img src={restaurant.image} alt={`Image for ${restaurant.name}`} variant='top' />
                                 ) : null}
                                 <Card.Body>
                                     <Card.Title>{restaurant.name}</Card.Title>
                                     <Card.Text>{restaurant.description}</Card.Text>
-                                    <Button type='button' value={restaurant.name} id={restaurant.id} onClick={handleRestaurantSelect}>Select</Button>
+                                    <Button variant='success' type='button' value={restaurant.name} id={restaurant.id} onClick={handleRestaurantSelect}>Select</Button>
                                 </Card.Body>
                             </Card>
                         </Col>

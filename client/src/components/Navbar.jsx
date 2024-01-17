@@ -18,7 +18,7 @@ const AppNavbar = () => {
 
     return (
         <>
-          <Navbar id='nav' bg='dark' variant='dark' expand='lg'>
+          <Navbar id='nav' bg='success' variant='dark' expand='lg'>
             <Container fluid>
               <Navbar.Brand as={Link} to='/'>
                 QuickBite Express

@@ -64,7 +64,7 @@ const RestaurantPage = () => {
         <Container>
             <h2>{menuName}</h2>
             {Auth.loggedIn() && (savedRestaurants() === false) ?
-            <Button type='button' value={menuId} onClick={(e) => handleSaveRestaurant(e)}>Save</Button>
+            <Button variant='dark' type='button' value={menuId} onClick={(e) => handleSaveRestaurant(e)}>Save</Button>
             : null}
             <Row>
                 {menuData.map((item) => (
