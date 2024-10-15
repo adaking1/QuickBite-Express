@@ -21,7 +21,7 @@
         "restaurantDescription":"Best place to get healthy and quick food",
         "restaurantImage": "INSERT CHIPOTLE LOGO",
         "location":"United States",
-        "tags": ["burrito, rice bowl", "fast food", "mexican"]
+        "tags": ["burrito", "rice bowl", "fast food", "mexican"]
     },
     {
         "restaurantName": "Burger King",
