@@ -29,6 +29,11 @@ const restaurantSchema = new Schema({
             type: String,
             ref: 'Item'
         }
+    ],
+    tags: [
+        {
+            type: String
+        }
     ]
 });
 

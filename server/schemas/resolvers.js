@@ -40,14 +40,13 @@ const resolvers = {
       return await Item.findOne({_id: itemId});
     },
     getFood: async (parent, { value }) => {
-      // console.log(value);
       // return await Restaurant.find({restaurantName: value});
       return await Restaurant.find({
         $or: [
           {restaurantName: value},
           {location: value},
           {items: {$elemMatch: {itemName: value}}},
-          {cuisine: value}
+          {tags: value}
         ]
       });
     },

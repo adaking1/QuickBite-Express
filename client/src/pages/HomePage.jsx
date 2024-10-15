@@ -14,21 +14,23 @@ const SearchFood = () => {
             return false;
         }
         const restaurant = await getFood({variables: {value: searchInput}});
+        console.log(restaurant.data)
         console.log(restaurant.data.getFood);
         const restaurantData = restaurant.data.getFood.map((restaurant) => ({
             id: restaurant._id,
             name: restaurant.restaurantName,
             description: restaurant.restaurantDescription,
             image: restaurant.restaurantImage,
-            location: restaurant.location        
+            location: restaurant.location,
+            tags: restaurant.tags
         }));
+        console.log(restaurantData);
             setSearchedFood(restaurantData);
             setSearchInput('');
         if (loading) {
             return <h2>LOADING...</h2>
         }
         const restaurantDat = restaurant.data.getFood;
-        console.log(restaurantData);
         return restaurantDat;
             
     };

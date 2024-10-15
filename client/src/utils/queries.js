@@ -1,14 +1,28 @@
 import { gql } from '@apollo/client';
 
+// export const GET_FOOD = gql `
+// query GetFood($value: String!) {
+//   getFood(value: $value) {
+//     _id
+//     restaurantId
+//     restaurantName
+//     location
+//     restaurantDescription
+//     restaurantImage
+//   }
+// }
+// `;
+
 export const GET_FOOD = gql `
 query GetFood($value: String!) {
   getFood(value: $value) {
     _id
-    restaurantId
-    restaurantName
     location
     restaurantDescription
+    restaurantId
     restaurantImage
+    restaurantName
+    tags
   }
 }
 `;

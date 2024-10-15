@@ -42,6 +42,7 @@ const typeDefs = `
         restaurantDescription: String
         restaurantImage: String
         location: String
+        tags: [String]
         Items: [Item]    
     }
 

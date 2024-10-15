@@ -15,6 +15,7 @@ db.once('open', async () => {
 
         // Seeding Restaurants
         await Restaurant.create(restaurantSeeds);
+        console.log(restaurantSeeds);
         
         // Seeding Users
         await User.create(userSeeds);
@@ -33,13 +34,13 @@ db.once('open', async () => {
                 ...itemData,
                 restaurantId: existingRestaurant._id,
             });
-            console.log(data);
+            // console.log(data);
 
             const restaurant = await Restaurant.findOneAndUpdate(
                 { _id: existingRestaurant._id },
                 {$addToSet: {items: data.itemId}}
             );
-            console.log(restaurant);
+            // console.log(restaurant);
         }
 
         for (let i = 0; i < reviewSeeds.length; i++) {
