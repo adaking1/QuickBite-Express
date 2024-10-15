@@ -349,5 +349,41 @@
         "cuisine":"Resturaunt Food",
         "restaurantId":"13",
         "itemId": "39"
+    },
+    {
+        "name": "Hand-tossed Pizza",
+        "description":"Hand-tossed pizza with your choice of toppings",
+        "image":"PIZZA IMAGE",
+        "price": 14.99,
+        "cuisine":"Fast Food",
+        "restaurantId":"14",
+        "itemId": "40"
+    },
+    {
+        "name": "Cheesy Bread",
+        "description":"Our homemade breadsticks loaded with cheese",
+        "image":"CHEESY BREAD IMAGE",
+        "price": 12.99,
+        "cuisine":"Fast Food",
+        "restaurantId":"14",
+        "itemId": "41"
+    },
+    {
+        "name": "Chocolate Lava Cake",
+        "description":"warm chocalate cake with fudge filling served with vanilla ice cream",
+        "image":"LAVA CAKE IMAGE",
+        "price": 8.99,
+        "cuisine":"Fast Food",
+        "restaurantId":"14",
+        "itemId": "42"
+    },
+    {
+        "name": "Chicken Tenders",
+        "description":"Fried breaded chicken tenderloins served with your choice of sauce",
+        "image":"CHICKEN TENDERS IMAGE",
+        "price": 12.59,
+        "cuisine":"Fast Food",
+        "restaurantId":"14",
+        "itemId": "43"
     }
 ]

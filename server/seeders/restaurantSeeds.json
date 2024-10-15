@@ -104,5 +104,13 @@
         "restaurantImage": "INSERT TEXAS LOGO",
         "location":"United States",
         "tags": ["steak", "pasta", "fajitas", "burger", "hamburger", "cheeseburger", "salad", "appetizer"]
+    },
+    {
+        "restaurantName": "Domino's",
+        "restaurantId": "14",
+        "restaurantDescription": "Fast order pizza",
+        "restaurantImage": "LOGO",
+        "location": "United States",
+        "tags": ["pizza", "chicken", "cheese", "fast food", "dessert", "bread"]
     }
 ]
