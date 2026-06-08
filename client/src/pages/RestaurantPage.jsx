@@ -22,9 +22,7 @@ const RestaurantPage = () => {
     const [getItem, { itemData, itemLoading }] = useLazyQuery(GET_ITEM); 
     const savedRestaurants = () => {
         const saved = JSON.parse(localStorage.getItem('saved_restaurants'));
-        console.log(saved)
-        console.log(saved.length);
-        if (!saved.length) {
+        if (saved === null) {
             console.log('XXX')
             return false;
         }
